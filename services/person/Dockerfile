@@ -9,4 +9,4 @@ RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
 COPY ./person ./person
 COPY ./test ./test
 
-CMD python person
+CMD python ./person/main.py
