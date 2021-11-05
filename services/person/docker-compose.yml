@@ -11,5 +11,4 @@ services:
     volumes:
       - .:/app
     environment:
-      - FLASK_APP=person
       - FLASK_ENV=development

@@ -9,4 +9,6 @@ RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
 COPY ./person ./person
 COPY ./test ./test
 
-CMD python ./person/main.py
+ENV FLASK_APP person
+
+CMD flask run --host=0.0.0.0

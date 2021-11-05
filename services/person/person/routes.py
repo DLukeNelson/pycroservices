@@ -1,9 +1,11 @@
 """
 routes for the person microservice
 """
-from person.main import app
+from flask import Blueprint
 
-@app.route('/')
+bp = Blueprint('person', __name__, url_prefix='/person')
+
+@bp.route('/')
 def index_page():
     """
     renders the index_page
