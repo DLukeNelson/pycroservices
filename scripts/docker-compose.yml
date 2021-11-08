@@ -4,8 +4,10 @@ services:
 
   pycroservice:
     build:
-      context: ../services/$SERVICE_NAME
+      context: ../services/
       dockerfile: Dockerfile
+      args:
+        SERVICE_NAME: $SERVICE_NAME
     ports:
       - "5000"
     volumes:
