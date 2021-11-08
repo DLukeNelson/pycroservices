@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+
+  pycroservice:
+    build:
+      context: ../services/$SERVICE_NAME
+      dockerfile: Dockerfile
+    ports:
+      - "5000"
+    volumes:
+      - ../services/$SERVICE_NAME:/app
+    environment:
+      - FLASK_ENV=development
