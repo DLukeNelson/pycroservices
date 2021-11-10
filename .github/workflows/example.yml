@@ -6,6 +6,7 @@ on:
       - main
 
 jobs:
-
-  test:
-    run: echo "stuff"
+  example_service:
+    uses: DLukeNelson/pycroservices/.github/workflows/service.yml@main
+    with:
+      service_name: example
