@@ -1,0 +1,11 @@
+name: Example service CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  test:
+    run: echo "stuff"
