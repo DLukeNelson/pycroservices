@@ -1,8 +1,11 @@
 name: Pycroservice CI
 
 on:
-  pull_request:
-    branches: main
+  workflow_call:
+    inputs:
+      service_name:
+        required: true
+        type: string
 
 jobs:
   build:
@@ -27,17 +30,17 @@ jobs:
         with:
           builder: ${{ steps.buildx.outputs.name }}
           context: ./services
-          build-args: SERVICE_NAME=person
+          build-args: SERVICE_NAME=${{ inputs.service_name }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          tags: person_pycroservice:latest
-          outputs: type=docker,dest=/tmp/person.tar
+          tags: ${{ inputs.service_name }}_pycroservice:latest
+          outputs: type=docker,dest=/tmp/${{ inputs.service_name }}.tar
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: person
-          path: /tmp/person.tar
+          name: ${{ inputs.service_name }}
+          path: /tmp/${{ inputs.service_name }}.tar
 
   test:
     runs-on: ubuntu-latest
@@ -52,17 +55,17 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
-          name: person
+          name: ${{ inputs.service_name }}
           path: /tmp
       
       - name: Load image
-        run: docker load --input /tmp/person.tar
+        run: docker load --input /tmp/${{ inputs.service_name }}.tar
       
       - name: run
-        run: ./scripts/run.sh person
+        run: ./scripts/run.sh ${{ inputs.service_name }}
 
       - name: lint
-        run: ./scripts/lint.sh person
+        run: ./scripts/lint.sh ${{ inputs.service_name }}
 
       - name: test
-        run: ./scripts/test.sh person
+        run: ./scripts/test.sh ${{ inputs.service_name }}

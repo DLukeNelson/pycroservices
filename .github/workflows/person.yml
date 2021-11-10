@@ -1,0 +1,12 @@
+name: Person service CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  call-workflow:
+    uses: DLukeNelson/pycroservices/.github/workflows/service.yml@HEAD
+    with:
+      service_name: person
