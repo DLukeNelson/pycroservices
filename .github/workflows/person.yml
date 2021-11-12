@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - services/person/**
+      - services/*
 
 jobs:
   person_service:
