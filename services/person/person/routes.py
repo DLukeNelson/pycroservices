@@ -16,4 +16,4 @@ def hello_world():
     """
     returns a string
     """
-    return 'hello world'
+    return 'hello world!'
